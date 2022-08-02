@@ -244,7 +244,7 @@ Set the doc id to be the same as claim id
 Make sure doc id is an integer
 Update the doc id in corpus converter to be an integer
 
-Doc id in corpus and claim need to match
+Doc id in corpus and claim need to match.
 
 Doc id in generalized data needs to be the same as claim id
 DOC ID MUST BE AN INTEGER (maybe a string, check with dev data of scifact)
