@@ -1,0 +1,322 @@
+JUNE 28 2022
+du -a --exclude=./.snapshot --exclude=.snapshot | sed '/.*\.\/.*\/.*/!d' | cut -d/ -f2 | sort | uniq -c | sort -nr
+
+  17508 .local
+   4893 .vscode-server
+   1288 .cache
+    564 .eclipse
+    311 playing
+    230 CS 250
+    148 UnixCourse
+    130 eclipse-workspace
+     36 .config
+     33 Start Menu
+      5 .ssh
+      3 .nemiver
+      3 Downloads
+      2 STUFF
+      1 .x2go
+      1 .swt
+      1 .nv
+      1 .emacs.d
+
+What are gold labels?  Specifically multivers gold labels?  Connecting multivers results with scifact evaluator?
+What do I do with prediciton/scifact.jsonl
+Ultimate goal is to run evaluator/eval.py to evaluate ML predictions versus human predictions
+Cannot run Eval.py because we don’t know what to pass (argument) into predictions script (longchecker/predict/py)
+GOLD LABEL:  So it appears they are calling these hand-labeled data "gold" labels, as they represent some reliable ground-truth value. This can be contrasted with the labels output by the algorithm, which are hopefully of high quality but are still subject to noise by construction.
+
+python scifact-evaluator/evaluator/eval.py --labels_file /scifact-evaluator/fixture/gold_small.jsonl --preds_file /scifact-evaluator/fixture/predictions_small.jsonl --metrics_output_file /metrics.json --verbose
+
+Look for a mention of labels (file, code)
+cs_eland007@hubble:/data/cs_eland007/scifact-evaluator$ python evaluator/eval.py --labels_file fixture/gold_small.jsonl --preds_file scifact.jsonl --metrics_output_file metrics.json --verbose
+
+REPLACE fixture/gold_small.jsonl
+Look into gold_small.jsonl (find label file)
+Look into previous prediction folder
+REPLACE fixture/gold_small.jsonl
+
+
+
+
+(base) cs_eland007@hubble:/data/cs_eland007/scifact-evaluator$ python evaluator/eval.py --labels_file fixture/gold_small.jsonl --preds_file scifact.jsonl --metrics_output_file metrics.json --verbose
+Traceback (most recent call last):
+  File "evaluator/eval.py", line 248, in <module>
+    main()
+  File "evaluator/eval.py", line 242, in main
+    metrics = evaluator.evaluate(golds, preds)
+  File "evaluator/eval.py", line 75, in evaluate
+    self.check_ordering(golds, preds)
+  File "evaluator/eval.py", line 117, in check_ordering
+    raise ValueError("Predicted claims do not match gold.")
+ValueError: Predicted claims do not match gold.
+
+
+
+python evaluator/eval.py --labels_file claims_test.jsonl --preds_file scifact.jsonl --metrics_output_file metrics.json --verbose
+Traceback (most recent call last):
+  File "evaluator/eval.py", line 248, in <module>
+    main()
+  File "evaluator/eval.py", line 242, in main
+    metrics = evaluator.evaluate(golds, preds)
+  File "evaluator/eval.py", line 75, in evaluate
+    self.check_ordering(golds, preds)
+  File "evaluator/eval.py", line 117, in check_ordering
+    raise ValueError("Predicted claims do not match gold.")
+ValueError: Predicted claims do not match gold.
+
+
+
+
+Labels file should be gold evidence.  Could not find Scifact gold labels, but we found out that gold labels are private.  We were able to get predictions, but we were not able to evaluate multivers to get metrics similar to the scifact leaderboard.
+TRY MULTIVERS WITH A DIFFERENT DATASET, THEN EVALUATE
+FIND DIFFERENT EVALUATOR (similar to scifact evaluator)???
+TRY COMMANDS IN SCIFACT REPOSITORY, THEN COMPARE WITH LEADERBOARD RESULTS TO SEE IF SIMILAR NUMBERS EXIST
+WHAT IS BERT VARIANTS???  ROBERTA AND SCIBERT WERE IN LEADERBOARD???
+REREAD READMES.  LOOK FOR DIFFERENT THINGS.
+PREDICTION FILE SCIFACT.JSONL AND GOLD LABELS ARE SUPPOSED TO BE COMPARED.
+FOR SCIFACT EVALUATOR, MULTIVERS CREATED LABELS IN PREDICTIONS FOLDER (SCIFACT.JSONL).  WE DON’T HAVE ACCESS TO GOLD LABELS FOR COMPARISON TO GET SIMILAR LEADERBOARD METRICS.
+DIFFERENT MACHINE LEARNING ALGORITHM, LIKE ARSJOINT, WE CAN STILL GET PREDICTION LABELS, BUT WE WOULD NOT HAVE ACCESS TO GOLD LABELS.  BUT ALL IN REFERENCE TO SCIFACT.  
+A DIFFERENT DATASET MIGHT GIVE US ACCESS TO GOLD LABELS (IF THE DIFFERENT EVALUATORS HAVE GOLD LABELS).  
+SCIFACT EVALUATOR EXISTS, BUT ARE THERE EVALUATORS FOR ARSJOINT AND COVIDFACT?
+MY PRIMARY GOAL IS TO REPLICATE NUMBERS IN SCIFACT LEADERBAORD.  IF I CANT DO THAT, THEN???????
+WE ARE TRYING TO SEE IF MULTIVERSE ALGORITHM WORKS?  WE WANT NUMBERS.
+MEET WITH DR WU IF I CANNOT FIGURE THIS OUT.  IF MULTIVERS DOES NOT WORK, TRY ANOTHER ALGORITH.  SCIFACT MIGHT BE A PROBLEM EVEN WITH ANOTHER ALGORITHM LIKE ARSJOINT.  
+FORGET ABOUT SCIFACT, FIND EVALUATOR SEPARATE FROM SCIFACT, OR WRITE ANTOHER EVALUATOR?
+I HAVE DONE THE WORK, BUT I CANNOT ACHIEVE RESULTS.  I NEED TO TELL WU THIS SO HE CAN GUIDE ME IN THE RIGHT DIRECTION.  IT HAS BEEN MORE THAN 4 WEEKS OF PROBLEMS, TIME TO MOVE ON!!!!!
+
+cs_eland007@hubble:/data/cs_eland007/scifact-evaluator$ python evaluator/eval.py --labels_file ../multivers/data/scifact/claims_dev_cited.jsonl --preds_file ../multivers/prediction/scifact.jsonl --metrics_output_file metrics.json --verbose
+
+Precision is the fraction of relevant instances among the retrieved instances
+Recall is the fraction of relevant instances that were retrieved. Both precision and recall are therefore based on relevance.
+F-measure is a measure of a test's accuracy. It is calculated from the precision and recall of the test, where the precision is the number of true positive results divided by the number of all positive results, including those not identified correctly, and the recall is the number of true positive results divided by the number of all samples that should have been identified as positive
+
+June 20th, 2022
+When running conda create --name multivers python=3.8 conda-build, I received the error ERROR: Could not install packages due to an OSError: [Errno 122] Disk quota exceeded: '/home/cs_eland007/.conda/envs/multivers/lib/python3.8/site-packages/thinc/tests/unit/test_pickle.py
+When trying to run bash script/predict.sh scifact, I received an error that said ModuleNotFoundError: No module named 'pytorch_lightning’.  I attempted the command pip install pytorch_lightning, however I encountered the error ERROR: Could not install packages due to an OSError: [Errno 122] Disk quota exceeded: '/home/cs_eland007/.conda/envs/multivers/lib/python3.8/site-packages/pyparsing’.
+Last week, I cleaned up my home directory and deleted many files/directories.  I did struggle with the SCP command because I struggled to correctly implement the command.  However, I am still having a major problem where it says that I do not have enough storage on my Hubble server account (cs_eland007).  
+I looked to see how much storage cs_eland007 still has left out of 10 GB, and I have about 4 GB available.  For my previous coding classes like CS252 and CS250, those folders only take up to 10 MB of storage.  The .conda file in my ~(home) directory is several GB of storage.  However, I should have enough storage to download everything I need for this project.  I don’t know why I am having this error.
+
+Make acknowledgement page regarding grad assistants near end (YASASI, SAAD, EMILY)
+Change title to presentation name from WU at beginning of program (look for presentation)
+Add “midterm progress” after title
+Add to works cited waddens work
+
+Add paper screenshot, title, evidence screenshot
+
+We can use this paper to debunk this paper’s claim
+
+Do different screenshots of something in my dataset.  Then take screenshot of actual DOI website.  All of that is on one page
+
+Take screenshot of title and abstract from DOI website
+Highlight sentences which contain rational (sentence) that support/refute labels
+
+Make table from results
+
+Multivers is fine-tuned on developmental data, therefore it has a higher chance of scoring better when detecting disinformation from scifact data
+
+FOCUS ON RESULTS
+
+Write one slide to focus data
+Show statistics regarding dataset I created
+How many are true, how many are false, show claims, SHOW STATISCS
+
+KEEP THESE SLIDES CLOSER TO END:  
+
+Add at least one more slide for data for statistics
+Add slide to talk about multivers implmmentation 
+Talk about my challenges I had when deploying multivers on Hubble
+How I solved my challenges
+What did I learn from my challenges
+TALK ABOUT CUDA
+Cuda enabled = GPU usage 
+
+{
+  "abstract_label_only_precision": 1.0,
+  "abstract_label_only_recall": 1.0,
+  "abstract_label_only_f1": 1.0,
+  "abstract_rationalized_precision": 1.0,
+  "abstract_rationalized_recall": 1.0,
+  "abstract_rationalized_f1": 1.0,
+  "sentence_selection_precision": 0.997275204359673,
+  "sentence_selection_recall": 1.0,
+  "sentence_selection_f1": 0.9986357435197818,
+  "sentence_label_precision": 0.997275204359673,
+  "sentence_label_recall": 1.0,
+  "sentence_label_f1": 0.9986357435197818
+}
+
+Modify predict.sh bash command in order to use developmental data instead
+
+ 1.  Do on training data and see how well it does
+2.  Make predictions on small gold
+See if results are consistent with 
+
+Hack (modify) predict.sh shell script
+
+We have achieved our goal
+
+We don’t have test data, we only have
+
+Wu might ask wadden for test data for replication purposes
+
+Use data that I have found 
+
+We want to see these models struggle with generalized data rather than covid
+
+Next goal:  create dataset in same format as scifact (dev, test, train)
+This must be done with script:
+Find claim, then label, do labeling on abstract (doi) to find sentence which contains evidence.  Overall, must label if paper supports or refutes claim
+The format must be compatible with input of multivers
+.json python package can help me to write .json 
+I can define my own id 
+Corpus is needed for evidence
+Corpus contains all evidence
+I should append my evidence to corpus
+goal:  this multiverse will be able to find this papers from the whole corpus and identify their rational and label, and then assign appropriate label (support, refute)
+corpus.json in predict.sh
+Append my evidence DOIS to end of corpus.jsonl in data of multivers
+A program will create the .json files from my word document
+
+WE DONT NEED TO REPLICATE THE METRICS FROM LEADERBOARD RN BECAUSE WE DONT HAVE TEST DATA, WOULD NEED THAT FROM WADDEN IN ORDER TO GET THOSE METRICS
+
+MAIN GOAL:  WRITING SCRIPTS NOW
+
+Break abstract into sentences in spare file.  Do not look for periods.  Sentence segmentation.  
+https://github.com/diasks2/pragmatic_segmenter
+Download this tool.
+Segment abstract into sentences using too
+Put each sentence into column or row
+Annotate on my own
+Look at each sentence, then see if each sentence supports claim or not.  Given context.
+Annotation is very intensive.  
+Why does ML label as so?
+
+I must select which sentence supports claim in abstract, then give sentence an ID (if first sentence, label ID 1)
+EXCEL SHEET FOR THIS
+Annotate 5, and then discuss with WU before proceeding with rest of annotation.
+
+I am creating only one file which contains all ids.  I found ground truths
+
+Remove doi.org and https:// for DOIs in dataset
+
+July 18 2022 Prep Meeting Notes
+
+I went to https://www.nltk.org, then went to https://www.nltk.org/install.html.  “pip install --user -U nltk” was successful.  I wanted to tokenize text into sentences, not individual words. I found https://stackoverflow.com/questions/37605710/tokenize-a-paragraph-into-sentence-and-then-into-words-in-nltk, and I attempted similar code to:
+
+import nltk
+
+sent_text = nltk.sent_tokenize(text) # this gives us a list of sentences
+# now loop over each sentence and tokenize it separately
+for sentence in sent_text:
+    tokenized_text = nltk.word_tokenize(sentence)
+    tagged = nltk.pos_tag(tokenized_text)
+    print(tagged)
+
+With the assistance of my lab partners, we tried to mirror this code in mine.  After doing so, running the file converter.py resulted in a message saying that I needed the package punkt from NLTK.  Error:
+
+Resource punkt not found.
+  Please use the NLTK Downloader to obtain the resource:
+
+  >>> import nltk
+  >>> nltk.download('punkt')
+  
+  For more information see: https://www.nltk.org/data.html
+
+I tried downloading punkt within script, and my terminal said Disk Quota Exceeded.  I could be out of storage for my cs account?  I tried the command 
+du -a --exclude=./.snapshot --exclude=.snapshot | sed '/.*\.\/.*\/.*/!d' | cut -d/ -f2 | sort | uniq -c | sort -nr
+For inodes And
+du -h --exclude=./.snapshot --exclude=.snapshot /home/cs_eland007/ | sort -rh | head -20
+For storage and I might be out of storage (exceeding 10 GB)
+
+July 25, 2022
+Make sure that csv information completely matches the format of SCIFACT dev data
+Calculate consensus numbers between Dominik and mine entire datasets and for each individual claim 
+Append abstracts to end of corpus.json within /data/cs_eland007/Models/multivers/data/scifact
+Identify which Ethan labels contradict human labels (CONFLICTING LABELS)
+
+Use jsonlines python package on GOOGLE
+
+Keep doi in csv file
+Doc id is the same as claim id
+Switch that
+Set the doc id to be the same as claim id
+Make sure doc id is an integer
+Update the doc id in corpus converter to be an integer
+
+Doc id in corpus and claim need to match
+
+Doc id in generalized data needs to be the same as claim id
+DOC ID MUST BE AN INTEGER (maybe a string, check with dev data of scifact)
+No quotes equals integer, quotes equals string
+
+ADD THIS TO GENERALIZEDDATA.JSONL IF RUNNING CSVTOJSON.PY AGAIN:
+{"id": 61, "claim": "“If you're a black woman, you're 320% more likely to die from complications in childbirth.”", "doc_ids": [61], "evidence": {"61": [{"sentences": [5], "label": "SUPPORT"}, {"sentences": [8], "label": "SUPPORT"}, {"sentences": [9], "label": "SUPPORT"}, {"sentences": [10], "label": "SUPPORT"}, {"sentences": [11], "label": "SUPPORT"}]}}
+
+HOW I GOT METRICS 08/02/2022
+(base) cs_eland007@hubble:/data/cs_eland007/Models$ python multivers/longchecker/predict.py --input_file /data/cs_eland007/GeneralizedData.jsonl --checkpoint_path multivers/checkpoints/scifact.ckpt --corpus_file /data/cs_eland007/NewCorpus.jsonl --output_file SnopesPredictions.jsonl
+(base) cs_eland007@hubble:/data/cs_eland007/Models$ python scifact-evaluator/evaluator/eval.py --labels_file ../GeneralizedData.jsonl --preds_file SnopesPredictions.jsonl --metrics_output_file SnopesMetrics.json --verbose
+SNOPESMETRICS.json IS THE FILE THAT CONTAINS THE METRICS OUTPUTTED BY MULTIVERS
+
+When I was running the evaluation script to get metrics, it was resulting in a value error message stating “conflicting labels.”  I looked with my peers at Dominik and my annotations, and the spots below were conflicting labels for the same claim.  After taking those out of the GeneralizedData.jsonl, there were no error messages when running the model.  
+A conclusion that I may have come to is that each sentence in an abstract must be consistent with refuting or supporting label (but can include neutral).  If there are mixed abstract labels, such as supporting and refuting, for an individual claim, there will be value error stating CONFLICTING LABELS.  The model will therefore not run.  This is bad because the whole dataset must be entirely binary.  Not everything piece of data fits into that kind of category.  Some abstracts contain sentences that contain both supporting and refuting labels. 
+
+Where there are conflicting labels in AnnotationsWithLabelsEthanLanders.csv:
+ClaimID:
+3
+31
+32 
+- SentID:
+    - 1
+        - SHOULD MAYBE BE NEUTRAL
+    - 5
+        - SHOULD PROBABLY BE NEUTRAL
+    - 6
+        - SHOULD PROBABLY BE NEUTRAL
+49
+- SendID:
+    - 1
+        - SHOULD MAYBE BE NEUTRAL
+    - 4
+        - I AM RIGHT PROBABLY
+    - 5
+        - I AM PROBABLY RIGHT
+    - 1, 2, 3 MIGHT NEED TO BE CHANGED TO NEUTRAL
+57
+
+Where there are conflicting labels in AnnotationsDominikSoos.csv:
+ClaimID:
+3
+31
+57
+
+Aug 1st 2022
+Tips for Creating Final Presentation:
+- [x] Put examples of my annotations
+- [ ] USE COLORS TO IDENTIFY LABELS (SUPPORT, REFUTE)
+- [ ] GIVE CREDIT TO DOMINIK
+
+Other Notes:
+- [ ] Talk about multivers model
+    - [ ] Must have a few steps
+    - [ ] Refer back to papers
+    - [x] Use diagrams from these multivers papers
+    - [ ] Cite papers
+    - [ ] Not plagiarism if cited
+    - [ ] Rephrase/quote parts of text
+    - [ ] Architecture of model
+    - [ ] What is used as input/intermediate results
+    - [ ] What are the 3rd party tools
+    - [ ] Longformer
+- [ ] In presentation
+    - [ ] Describe multivers model
+    - [ ] Input/output
+    - [ ] Architecture
+    - [ ] Refer to idea of architecture
+    - [ ] Highlight key components
+    - [ ] FOOTER
+        - [ ] Twitter handle, date
+        - [ ] 
+
+Grab something from dev file.  
+Putting items from dev file into my generalized data.jsonl to test and see if model is working.  Result would be in predictions output
