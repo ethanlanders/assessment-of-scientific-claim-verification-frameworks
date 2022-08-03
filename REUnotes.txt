@@ -320,3 +320,105 @@ Other Notes:
 
 Grab something from dev file.  
 Putting items from dev file into my generalized data.jsonl to test and see if model is working.  Result would be in predictions output
+
+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+HOW TO GET METRICS
+
+TRYING WITH SCIFACT CHECKPOINT:
+(base) cs_eland007@hubble:/data/cs_eland007/Models$ python multivers/longchecker/predict.py --input_file /data/cs_eland007/GeneralizedData.jsonl --checkpoint_path multivers/checkpoints/scifact.ckpt --corpus_file /data/cs_eland007/NewCorpus.jsonl --output_file ScifactPredictions.jsonl
+(base) cs_eland007@hubble:/data/cs_eland007/Models$ python scifact-evaluator/evaluator/eval.py --labels_file ../GeneralizedData.jsonl --preds_file SnopesPredictions.jsonl --metrics_output_file ScifactMetrics.json --verbose
+
+{
+  "abstract_label_only_precision": 1.0,
+  "abstract_label_only_recall": 0.027777777777777776,
+  "abstract_label_only_f1": 0.05405405405405406,
+  "abstract_rationalized_precision": 0.0,
+  "abstract_rationalized_recall": 0.0,
+  "abstract_rationalized_f1": 0.0,
+  "sentence_selection_precision": 0.0,
+  "sentence_selection_recall": 0.0,
+  "sentence_selection_f1": 0.0,
+  "sentence_label_precision": 0.0,
+  "sentence_label_recall": 0.0,
+  "sentence_label_f1": 0.0
+}
+
+TRYING WITH COVIDFACT CHECKPOINT:
+(base) cs_eland007@hubble:/data/cs_eland007/Models$ python multivers/longchecker/predict.py --input_file /data/cs_eland007/GeneralizedData.jsonl --checkpoint_path multivers/checkpoints/covidfact.ckpt --corpus_file /data/cs_eland007/NewCorpus.jsonl --output_file CovidfactPredictions.jsonl
+(base) cs_eland007@hubble:/data/cs_eland007/Models$ python scifact-evaluator/evaluator/eval.py --labels_file ../GeneralizedData.jsonl --preds_file CovidfactPredictions.jsonl --metrics_output_file CovidfactMetrics.json --verbose
+{
+  "abstract_label_only_precision": 0.42857142857142855,
+  "abstract_label_only_recall": 0.08333333333333333,
+  "abstract_label_only_f1": 0.13953488372093023,
+  "abstract_rationalized_precision": 0.0,
+  "abstract_rationalized_recall": 0.0,
+  "abstract_rationalized_f1": 0.0,
+  "sentence_selection_precision": 0.2857142857142857,
+  "sentence_selection_recall": 0.021052631578947368,
+  "sentence_selection_f1": 0.0392156862745098,
+  "sentence_label_precision": 0.0,
+  "sentence_label_recall": 0.0,
+  "sentence_label_f1": 0.0
+}
+
+TRYING WITH FEVER CHECKPOINT:
+(base) cs_eland007@hubble:/data/cs_eland007/Models$ python multivers/longchecker/predict.py --input_file /data/cs_eland007/GeneralizedData.jsonl --checkpoint_path multivers/checkpoints/fever.ckpt --corpus_file /data/cs_eland007/NewCorpus.jsonl --output_file FeverPredictions.jsonl
+(base) cs_eland007@hubble:/data/cs_eland007/Models$ python scifact-evaluator/evaluator/eval.py --labels_file ../GeneralizedData.jsonl --preds_file FeverPredictions.jsonl --metrics_output_file FeverMetrics.json --verbose
+{
+  "abstract_label_only_precision": 0.0,
+  "abstract_label_only_recall": 0.0,
+  "abstract_label_only_f1": 0.0,
+  "abstract_rationalized_precision": 0.0,
+  "abstract_rationalized_recall": 0.0,
+  "abstract_rationalized_f1": 0.0,
+  "sentence_selection_precision": 0.0,
+  "sentence_selection_recall": 0.0,
+  "sentence_selection_f1": 0.0,
+  "sentence_label_precision": 0.0,
+  "sentence_label_recall": 0.0,
+  "sentence_label_f1": 0.0
+}
+
+TRYING WITH FEVER__SCI CHECKPOINT:
+(base) cs_eland007@hubble:/data/cs_eland007/Models$ python multivers/longchecker/predict.py --input_file /data/cs_eland007/GeneralizedData.jsonl --checkpoint_path multivers/checkpoints/fever_sci.ckpt --corpus_file /data/cs_eland007/NewCorpus.jsonl --output_file Fever_SciPredictions.jsonl
+(base) cs_eland007@hubble:/data/cs_eland007/Models$ python scifact-evaluator/evaluator/eval.py --labels_file ../GeneralizedData.jsonl --preds_file Fever_SciPredictions.jsonl --metrics_output_file Fever_SciMetrics.json --verbose
+{
+  "abstract_label_only_precision": 1.0,
+  "abstract_label_only_recall": 0.027777777777777776,
+  "abstract_label_only_f1": 0.05405405405405406,
+  "abstract_rationalized_precision": 0.0,
+  "abstract_rationalized_recall": 0.0,
+  "abstract_rationalized_f1": 0.0,
+  "sentence_selection_precision": 0.0,
+  "sentence_selection_recall": 0.0,
+  "sentence_selection_f1": 0.0,
+  "sentence_label_precision": 0.0,
+  "sentence_label_recall": 0.0,
+  "sentence_label_f1": 0.0
+}
+
+
+TRYING WITH HEALTHVER CHECKPOINT:
+(base) cs_eland007@hubble:/data/cs_eland007/Models$ python multivers/longchecker/predict.py --input_file /data/cs_eland007/GeneralizedData.jsonl --checkpoint_path multivers/checkpoints/healthver.ckpt --corpus_file /data/cs_eland007/NewCorpus.jsonl --output_file HealthverPredictions.jsonl
+(base) cs_eland007@hubble:/data/cs_eland007/Models$ python scifact-evaluator/evaluator/eval.py --labels_file ../GeneralizedData.jsonl --preds_file HealthverPredictions.jsonl --metrics_output_file HealthverMetrics.json --verbose
+{
+  "abstract_label_only_precision": 0.2222222222222222,
+  "abstract_label_only_recall": 0.05555555555555555,
+  "abstract_label_only_f1": 0.08888888888888888,
+  "abstract_rationalized_precision": 0.0,
+  "abstract_rationalized_recall": 0.0,
+  "abstract_rationalized_f1": 0.0,
+  "sentence_selection_precision": 0.0,
+  "sentence_selection_recall": 0.0,
+  "sentence_selection_f1": 0.0,
+  "sentence_label_precision": 0.0,
+  "sentence_label_recall": 0.0,
+  "sentence_label_f1": 0.0
+}
+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+GitHub:  How to run update commands in REPOSITORY
+
+git add (WHATEVER FILE)
+git commit -m “(MESSAGE INSIDE QUOTES)”
+git push origin main
+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
