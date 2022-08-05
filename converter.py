@@ -1,4 +1,7 @@
-# This file goes from takes the abstract and tokenizes the sentences
+# This file takes Abstracts.csv's abstracts and tokenizes the sentences, then putting those
+# sentences into AnnotationsNoLabels.csv.  From there, the tokenized sentences
+# must be labeled.  
+
 import csv
 import nltk
 
