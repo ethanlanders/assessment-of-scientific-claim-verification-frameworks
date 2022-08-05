@@ -1,4 +1,5 @@
-#THIS FILE CREATES GeneralizedData.jsonl, WHICH IS NEEDED BY MULTIVERS
+# THIS FILE CREATES GeneralizedData.jsonl, WHICH IS NEEDED BY MULTIVERS
+# GeneralizedData.jsonl will mimic the developmental data of SciFact
 
 import csv
 import jsonlines
