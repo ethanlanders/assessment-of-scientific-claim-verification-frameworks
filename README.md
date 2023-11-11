@@ -1,5 +1,7 @@
 # Project: An Assessment of Scientific Claim Verification Frameworks
 
+Click [here](https://digitalcommons.odu.edu/cgi/viewcontent.cgi?article=1005&context=reu2022_computerscience) to access the final, published presentation for this project.
+
 ## Introduction
 - **Objective:** Automate scientific claim verification in response to the growing spread of scientific disinformation.
 - **Key Models:** Evaluated the state-of-the-art model, MultiVerS, trained on the SciFact dataset.
