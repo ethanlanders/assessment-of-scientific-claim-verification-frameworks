@@ -1,4 +1,4 @@
-# Project: An Assessment of Scientific Claim Verification Frameworks
+# An Assessment of Scientific Claim Verification Frameworks
 
 Click [here](https://digitalcommons.odu.edu/cgi/viewcontent.cgi?article=1005&context=reu2022_computerscience) to access the final, published slide deck for this project.
 
