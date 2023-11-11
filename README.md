@@ -3,7 +3,7 @@
 Click [here](https://digitalcommons.odu.edu/cgi/viewcontent.cgi?article=1005&context=reu2022_computerscience) to access the final, published slide deck for this project.
 
 ## Introduction
-- **Objective:** Automate scientific claim verification in response to the growing spread of scientific disinformation.
+- **Objective:** To evaluate automated scientific claim verification in response to the growing spread of scientific disinformation.
 - **Key Models:** Evaluated the state-of-the-art model, MultiVerS, trained on the SciFact dataset.
 - **Scientific Questions:**
   - How well does the SciFact-trained model detect open-domain scientific disinformation?
