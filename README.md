@@ -1,6 +1,7 @@
 # An Assessment of Scientific Claim Verification Frameworks
 
-Click [here](https://digitalcommons.odu.edu/cgi/viewcontent.cgi?article=1005&context=reu2022_computerscience) to access the final, published slide deck for this project.
+* This research has been published by the Association for Computing Machinery (ACM). [Click here](https://dl.acm.org/doi/10.1145/3565287.3617630) to view the published paper.
+* [Click here](https://digitalcommons.odu.edu/cgi/viewcontent.cgi?article=1005&context=reu2022_computerscience) to access my final, published slide deck that I presented for this project.
 
 ## Introduction
 - **Objective:** To evaluate automated scientific claim verification in response to the growing spread of scientific disinformation.
